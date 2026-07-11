@@ -4,7 +4,7 @@
   inherits: true;
   initial-value: #d9ddc2;
 }
-
+/* hallo + */
 @property --carousel-frame {
   syntax: "<color>";
   inherits: true;
