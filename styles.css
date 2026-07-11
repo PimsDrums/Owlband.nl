@@ -1,0 +1,730 @@
+/* kleure van boven */
+@property --hero-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #d9ddc2;
+}
+
+@property --carousel-frame {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #697059;
+}
+
+:root {
+  --paper: #eee8d9;
+  --paper-light: #f5f1e7;
+  --ink: #1b1a16;
+  --rust: #a6442e;
+  --olive: #5e6646;
+  --line: rgba(27, 26, 22, .28);
+  --max-width: 1380px;
+  --hero-bg: #d9ddc2;
+  --carousel-frame: #697059;
+  transition:
+    --hero-bg 1.15s ease,
+    --carousel-frame 1.15s ease;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: white;
+  background: var(--paper);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 16px;
+  font-size: 18px;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  pointer-events: none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+img { display: block; max-width: 100%; }
+button, a { font: inherit; }
+button { color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+.typmasjien,
+.straatbord,
+.plak-nummer,
+.kiekes-onderschrift,
+.plaat-bijschrift,
+.werk-op-un-rij,
+.volg-ons,
+.onderste-balk { font-family: "DM Mono", monospace; }
+
+/* dun kop */
+.kopbalk {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 78px;
+  padding: 0 max(24px, calc((100vw - var(--max-width)) / 2));
+  background: var(--hero-bg);
+  border-bottom: 1px solid var(--ink);
+  backdrop-filter: blur(12px);
+}
+
+.ons-orkesje {
+  display: inline-flex;
+  align-items: center;
+  margin-left: clamp(16px, 2.5vw, 48px);
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+.straatbord {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 42px);
+  font-size: 11px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.straatbord a {
+  position: relative;
+  padding: 8px 0;
+}
+
+.straatbord a::after {
+  content: "";
+  position: absolute;
+  right: 100%;
+  bottom: 3px;
+  left: 0;
+  height: 1px;
+  background: var(--ink);
+  transition: right .25s ease;
+}
+
+.straatbord a:hover::after,
+.straatbord a:focus-visible::after { right: 0; }
+
+.menu-knupke { display: none; }
+
+/* vurste plak */
+.vurste-plak {
+  display: grid;
+  grid-template-columns: minmax(340px, .78fr) minmax(500px, 1.22fr);
+  min-height: min(780px, calc(100svh - 78px));
+  border-bottom: 1px solid var(--ink);
+}
+
+.vurste-praot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(70px, 9vw, 138px) clamp(35px, 6vw, 92px);
+  background: var(--hero-bg);
+  border-right: 1px solid var(--ink);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(72px, 9vw, 138px);
+  font-weight: 500;
+  line-height: .77;
+  letter-spacing: -.065em;
+}
+
+.vurste-inleiding {
+  max-width: 440px;
+  margin: 38px 0 0;
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1.25;
+  letter-spacing: -.015em;
+}
+
+.vurste-kleine-praot {
+  max-width: 410px;
+  margin: 20px 0 0;
+  color: rgba(27,26,22,.68);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.plaat-in-de-maak {
+  align-self: flex-start;
+  margin-top: 40px;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+/* de kiekeskast */
+.boxske {
+  position: relative;
+  min-width: 0;
+  overflow: visible;
+  overflow: hidden;
+  background: #cccccc;
+  background: var(--carousel-frame);
+}
+
+.kiekes,
+.kiek { position: absolute; inset: 0; }
+
+.kiek {
+  margin: 22px 30px 22px 50px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .55s ease, visibility .55s;
+}
+
+.kiek.is-an-de-beurt {
+  visibility: visible;
+  opacity: 1;
+}
+
+.kiek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.72) sepia(.09) contrast(1.03);
+}
+
+.kiek::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(27,26,22,.42), transparent 45%);
+}
+
+.kiekes-onderschrift {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 70px;
+  padding: 0 24px;
+  color: var(--paper-light);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.kiekes-bediening {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.kiekes-puntjes { display: flex; gap: 6px; margin-right: 10px; }
+
+.puntje {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.puntje.is-an-de-beurt { background: currentColor; }
+
+.kiekes-knupke {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(245,241,231,.68);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease;
+}
+
+.kiekes-knupke:hover,
+.kiekes-knupke:focus-visible {
+  color: var(--ink);
+  background: var(--paper-light);
+}
+
+/* kort neijs */
+.neijs-regel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--ink);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.neijs-regel span {
+  padding: 18px clamp(20px, 4vw, 58px);
+  text-align: center;
+}
+
+.neijs-regel span + span { border-left: 1px solid var(--ink); }
+
+/* gewone stukken */
+.voto {
+  display: grid;
+  grid-template-columns: minmax(170px, .36fr) minmax(0, 1.64fr);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 150px) 24px;
+}
+
+.plak-nummer {
+  padding-top: 10px;
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.plak-nummer span {
+  display: block;
+  width: 34px;
+  height: 1px;
+  margin-top: 12px;
+  background: var(--ink);
+}
+
+.plak-kop {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(48px, 6vw, 86px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.04em;
+}
+
+.ons-verhaal-opmaak {
+  display: grid;
+  grid-template-columns: minmax(240px, .7fr) minmax(320px, 1.3fr);
+  gap: clamp(40px, 7vw, 100px);
+  margin-top: 65px;
+}
+
+.ons-kiekske {
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  object-fit: cover;
+  filter: saturate(.65) sepia(.1);
+}
+
+.ons-verhaal {
+  align-self: end;
+  padding-bottom: 8px;
+}
+
+.ons-verhaal p {
+  max-width: 610px;
+  margin: 0;
+  font-size: clamp(22px, 2.4vw, 34px);
+  line-height: 1.28;
+  letter-spacing: -.02em;
+}
+
+.ons-verhaal p + p {
+  max-width: 520px;
+  margin-top: 25px;
+  color: rgba(27,26,22,.65);
+  font-size: 17px;
+  line-height: 1.58;
+  letter-spacing: 0;
+}
+
+/* de plaat */
+.eerste-plaat {
+  color: var(--paper-light);
+  background: var(--olive);
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.plaat-binnen {
+  display: grid;
+  grid-template-columns: minmax(280px, .7fr) minmax(340px, 1.3fr);
+  gap: clamp(50px, 9vw, 130px);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 145px) 24px;
+}
+
+.hoeske {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 48px);
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 16px 16px 0 rgba(27,26,22,.22);
+}
+
+.hoeske::before,
+.hoeske::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 145%;
+  height: 1px;
+  background: rgba(27,26,22,.45);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.hoeske::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.hoeske-nog-nie {
+  position: relative;
+  z-index: 1;
+  padding: 16px 22px;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: .06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hoeske-nog-nie strong {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.plaat-praot { align-self: center; }
+
+.plaat-bijschrift {
+  margin: 0 0 25px;
+  font-size: 10px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.plaat-praot h2 {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(54px, 7vw, 100px);
+  font-weight: 400;
+  line-height: .88;
+  letter-spacing: -.05em;
+}
+
+.plaat-praot > p {
+  max-width: 550px;
+  margin: 32px 0 0;
+  color: rgba(245,241,231,.75);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.werk-op-un-rij {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 50px;
+  border-top: 1px solid rgba(245,241,231,.36);
+  border-bottom: 1px solid rgba(245,241,231,.36);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.werk-op-un-rij span {
+  position: relative;
+  padding: 16px 10px 16px 20px;
+}
+
+.werk-op-un-rij span::before {
+  content: "";
+  position: absolute;
+  top: 19px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.werk-op-un-rij span:nth-child(2)::before { background: var(--paper-light); }
+
+/* optreeje */
+.optreeje {
+  border-bottom: 1px solid var(--ink);
+}
+
+.optreeje-praot {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 30px;
+  margin-top: 65px;
+  padding: 32px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.optreeje-praot strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: clamp(25px, 3vw, 39px);
+  font-weight: 400;
+}
+
+.optreeje-praot p {
+  margin: 0;
+  color: rgba(27,26,22,.65);
+  font-size: 16px;
+}
+
+.optreeje-merk {
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* efkes buurte */
+.efkes-buurte {
+  color: var(--paper-light);
+  background: var(--rust);
+}
+
+.buurt-binnen {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(85px, 11vw, 160px) 24px 48px;
+}
+
+.buurt-label {
+  margin: 0 0 25px;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.efkes-buurte h2 {
+  max-width: 1000px;
+  margin: 0;
+  font-size: clamp(65px, 10vw, 145px);
+  font-weight: 400;
+  line-height: .86;
+  letter-spacing: -.06em;
+}
+
+.stuur-un-bericht {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  margin-top: clamp(45px, 6vw, 80px);
+  padding: clamp(24px, 3vw, 38px);
+  color: var(--ink);
+  background: var(--paper-light);
+  border: 1px solid var(--ink);
+  box-shadow: none;
+  box-shadow: 10px 10px 0 rgba(27,26,22,.22);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.stuur-un-bericht:hover {
+  box-shadow: 5px 5px 0 rgba(27,26,22,.28);
+  transform: translate(5px, 5px);
+}
+
+.stuur-un-bericht strong,
+.stuur-un-bericht small { display: block; }
+
+.stuur-un-bericht strong {
+  font-size: clamp(31px, 4vw, 58px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.035em;
+}
+
+.stuur-un-bericht small {
+  margin-top: 10px;
+  color: rgba(27,26,22,.65);
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.bericht-doen {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex: 0 0 auto;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.bericht-pijl {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 24px;
+}
+
+.buurt-onder {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 55px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(245,241,231,.6);
+}
+
+.buurt-praot {
+  max-width: 460px;
+  margin: 0;
+  color: rgba(245,241,231,.75);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.volg-ons {
+  display: flex;
+  gap: 24px;
+  font-size: 10px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.volg-ons a { border-bottom: 1px solid currentColor; }
+.volg-ons a[aria-disabled="true"] { opacity: .58; cursor: default; }
+
+/* helemaal onder */
+.onderste-balk {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 24px;
+  color: var(--paper-light);
+  background: var(--rust);
+  border-top: 1px solid rgba(245,241,231,.45);
+  font-size: 9px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+:focus-visible { outline: 2px solid var(--rust); outline-offset: 4px; }
+.eerste-plaat :focus-visible,
+.efkes-buurte :focus-visible { outline-color: var(--paper-light); }
+
+/* vur kleiner scherm */
+@media (max-width: 850px) {
+  .kopbalk { height: 68px; padding-inline: 20px; }
+  .straatbord { gap: 17px; font-size: 9px; }
+
+  .vurste-plak {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .vurste-praot {
+    min-height: 560px;
+    padding: 80px 28px 65px;
+    border-right: 0;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  h1 { font-size: clamp(74px, 20vw, 118px); }
+  .kiekeskast { min-height: 68svh; }
+
+  .voto {
+    grid-template-columns: 110px 1fr;
+    padding-inline: 22px;
+  }
+
+  .ons-verhaal-opmaak,
+  .plaat-binnen { gap: 42px; }
+}
+
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+  .ons-orkesje { margin-left: 4px; font-size: 21px; }
+
+  .straatbord {
+    gap: 12px;
+  }
+
+  .straatbord a:nth-child(2),
+  .straatbord a:nth-child(3) { display: none; }
+
+  .vurste-praot { min-height: 510px; }
+  .plaat-in-de-maak { margin-top: 30px; }
+      .kiekeskast { min-height: 58svh; }
+      .kiek { margin: 14px; }
+  .kiekes-onderschrift { padding-inline: 16px; }
+
+  .neijs-regel { grid-template-columns: 1fr; }
+  .neijs-regel span { padding: 13px 20px; }
+  .neijs-regel span + span { border-top: 1px solid var(--ink); border-left: 0; }
+
+  .voto {
+    grid-template-columns: 1fr;
+    padding: 76px 20px;
+  }
+
+  .plak-nummer { margin-bottom: 35px; }
+  .ons-verhaal-opmaak { grid-template-columns: 1fr; margin-top: 45px; }
+  .ons-kiekske { aspect-ratio: 5 / 4; }
+
+  .plaat-binnen {
+    grid-template-columns: 1fr;
+    padding: 76px 20px;
+  }
+
+  .hoeske { width: min(86vw, 390px); }
+  .werk-op-un-rij { grid-template-columns: 1fr; }
+  .werk-op-un-rij span + span { border-top: 1px solid rgba(245,241,231,.24); }
+
+  .optreeje-praot { grid-template-columns: 1fr; }
+  .optreeje-merk { justify-self: start; }
+
+  .buurt-binnen { padding: 85px 20px 40px; }
+  .stuur-un-bericht { align-items: flex-start; flex-direction: column; gap: 24px; }
+  .bericht-doen { width: 100%; justify-content: space-between; }
+  .buurt-onder { align-items: flex-start; flex-direction: column; margin-top: 55px; }
+  .volg-ons { flex-wrap: wrap; }
+  .onderste-balk { padding-inline: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OWLBAND — a new indie rock band with a love for the warmth and freedom of 1970s music.">
+  <title>OWLBAND — Indie Rock</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- kut balkske -->
+  <div class="kopbalk">
+    <a class="ons-orkesje" href="#top" aria-label="OWLBAND home">
+      OWLBAND
+    </a>
+
+    <div class="straatbord" aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#owlbum">Owlbum</a>
+      <a href="#shows">Shows</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+
+  <div id="top">
+    <!-- hier begint ut -->
+    <div class="vurste-plak" aria-labelledby="hero-title">
+      <div class="vurste-praot">
+        <h1 id="hero-title">OWL<br>BAND</h1>
+        <span class="plaat-in-de-maak">Debut owlbum<br>in progress</span>
+      </div>
+
+      <!-- de kiekes -->
+      <div class="boxske" aria-roledescription="carousel" aria-label="OWLBAND photos">
+        <div class="kiekes" aria-live="polite"></div>
+
+        <div class="kiekes-onderschrift">
+          <span class="kiekes-praot">Band photo 01</span>
+          <div class="kiekes-bediening">
+            <div class="kiekes-puntjes" aria-label="Choose a photo"></div>
+            <button class="kiekes-knupke vurige" type="button" aria-label="Previous photo">←</button>
+            <button class="kiekes-knupke volgende" type="button" aria-label="Next photo">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="neijs-regel" aria-label="Band status">
+      <span>First songs being recorded</span>
+      <span>Debut owlbum coming eventually</span>
+      <span>Shows to be announced</span>
+    </div>
+
+    <!-- wie we zijn -->
+    <div class="voto" id="about" aria-labelledby="about-title">
+      <div class="plak-nummer">01 / About<span></span></div>
+      <div>
+        <h2 class="plak-kop" id="about-title">A band almost at the point of going tripple tungsten</h2>
+
+        <div class="ons-verhaal-opmaak">
+          <img class="ons-kiekske" alt="OWLBAND rehearsing together">
+          <div class="ons-verhaal">
+            <p>our sound.</p>
+            <p>O.W.L is Old World Lizard We are rehearsing recording and playing wherever we can so share our music and passion</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- irste ding -->
+    <div class="eerste-plaat" id="owlbum" aria-labelledby="owlbum-title">
+      <div class="plaat-binnen">
+        <div class="hoeske" aria-label="Placeholder artwork for OWLBAND's first owlbum">
+          <span class="hoeske-nog-nie">Owlbum artwork<br><strong>To be announced</strong></span>
+        </div>
+
+        <div class="plaat-praot">
+          <p class="plaat-bijschrift">First record / Untitled</p>
+          <h2 id="owlbum-title">Coming when it’s ready.</h2>
+          <p>There is no single, stream or release date yet.</p>
+
+          <div class="werk-op-un-rij" aria-label="Owlbum progress">
+            <span>Writing now</span>
+            <span>Recording</span>
+            <span>Out Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- optreei kumt nog -->
+    <div class="voto optreeje" id="shows" aria-labelledby="shows-title">
+      <div class="plak-nummer">02 / Live<span></span></div>
+      <div>
+        <h2 class="plak-kop" id="shows-title">We’ll see you out there.</h2>
+
+        <div class="optreeje-praot">
+          <div>
+            <strong>No dates announced — yet.</strong>
+            <p>For now, we are in the rehearsal room. Future shows will appear here.</p>
+          </div>
+          <span class="optreeje-merk">Live plans / TBA</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ekes prate -->
+    <div class="efkes-buurte" id="contact" aria-labelledby="contact-title">
+      <div class="buurt-binnen">
+        <p class="buurt-label">Bookings / Press / Questions</p>
+        <h2 id="contact-title">Bookings &amp;<br>contact.</h2>
+
+        <a class="stuur-un-bericht" href="mailto:?subject=Booking%20or%20contact%20for%20OWLBAND&amp;body=Hello%20OWLBAND%2C%0A%0A" aria-label="Open your email app to contact OWLBAND">
+          <span>
+            <strong>Email OWLBAND</strong>
+            <small>For bookings, contact and general enquiries</small>
+          </span>
+          <span class="bericht-doen">
+            Opens your email app
+            <span class="bericht-pijl" aria-hidden="true">↗</span>
+          </span>
+        </a>
+
+        <div class="buurt-onder">
+          <p class="buurt-praot">For rehearsal-room updates, future songs and show announcements, you can also follow the band on Instagram.</p>
+          <div class="volg-ons" aria-label="Social links">
+            <a href="https://www.instagram.com/oldworldlizard_band/" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- onderste stukske bot -->
+  <div class="onderste-balk">
+    <span>© <span id="year"></span> OWLBAND</span>
+    <span>Independent / In progress</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
